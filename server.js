@@ -1,10 +1,22 @@
+import 'dotenv/config'
 import express from 'express'
 import jwt from 'jsonwebtoken'
 import cookieParser from 'cookie-parser'
-import 'dotenv/config'
+import cors from 'cors'
+import { RegisterRouter } from './routes/register.js'
+import { LoginRouter } from './routes/login.js'
 
 const app = express()
 
+app.use(express.json())
+app.use(cookieParser())
+app.use(cors({
+  origin: `http://localhost:5173`,
+  credentials: true
+}))
+
+app.use('/register', RegisterRouter)
+app.use('/login', LoginRouter)
 
 
 app.listen(process.env.PORT, () => {
