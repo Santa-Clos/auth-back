@@ -1,11 +1,11 @@
 import 'dotenv/config'
 import express from 'express'
-import jwt from 'jsonwebtoken'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import { RegisterRouter } from './routes/register.js'
 import { LoginRouter } from './routes/login.js'
 import { authMiddleware } from './middlewares/authMiddleware.js'
+import { ProductRouter } from './routes/products.js'
 
 const app = express()
 
@@ -22,7 +22,7 @@ app.get("/auth/me", authMiddleware, (req, res) => {
 
 app.use('/register', RegisterRouter)
 app.use('/login', LoginRouter)
-
+app.use('/products', authMiddleware, ProductRouter)
 
 app.listen(process.env.PORT, () => {
   console.log(`server listening in http://localhost:${process.env.PORT}`)

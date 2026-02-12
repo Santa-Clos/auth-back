@@ -34,9 +34,9 @@ export class UserModel {
       RETURNING *;`,
       [id, username, hashedPassword]
     )
-    return rows[0] = {
+    return {
       id,
-      username,
+      username
     }
   }
 
